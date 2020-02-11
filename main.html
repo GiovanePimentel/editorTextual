@@ -1,0 +1,41 @@
+<html>
+<head>
+	<title>
+	</title>
+</head>
+<body>
+	<div id="box1">
+		<button data_tag="I"><b>b</b></button>
+		<button data_tag="I"><i>i</i></button>
+		<textarea id="txtArea">
+		</textarea>
+		<div id="box2">
+
+		</div>
+		
+	</div>
+</body>
+<script type="text/javascript">
+let button = document.querySelector('button');
+
+let textarea = document.querySelector('textarea');
+//button.onclick = getSelecao(textarea);
+button.addEventListener('click',getSelecao)
+
+function getSelecao(campo){
+ campo = textarea;
+  if(document.selection){
+    sel = document.selection.createRange().text;
+  }else{
+    sel = campo.value.substring(campo.selectionStart, campo.selectionEnd);
+  }
+  let b= '';
+  x = textarea.value;
+  b = x.replace(sel,sel.bold());
+document.querySelector("#box2").innerHTML = b;
+textarea.value = '';
+textarea.value = b;
+
+}
+</script>
+</html>
