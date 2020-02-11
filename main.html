@@ -5,8 +5,8 @@
 </head>
 <body>
 	<div id="box1">
-		<button data_tag="I"><b>b</b></button>
-		<button data_tag="I"><i>i</i></button>
+		<button data_tag="I"id="b"><b>b</b></button>
+		<button data_tag="I"id="i"><i>i</i></button>
 		<textarea id="txtArea">
 		</textarea>
 		<div id="box2">
@@ -16,26 +16,42 @@
 	</div>
 </body>
 <script type="text/javascript">
-let button = document.querySelector('button');
-
+let bNegrito = document.querySelector('button#b');
+let bItalico = document.querySelector('button#i');
 let textarea = document.querySelector('textarea');
-//button.onclick = getSelecao(textarea);
-button.addEventListener('click',getSelecao)
 
+bNegrito.addEventListener('click',alteraNegrito);
+bItalico.addEventListener('click',alteraItalico);
+
+function alteraNegrito(){
+	let string = getSelecao(textarea);
+	let txt = textarea.value;
+	let replacement = "";
+	
+	textarea.value = replacement;
+	replacement = txt.replace(string,string.bold());
+	
+	textarea.value = replacement;
+	document.querySelector("#box2").innerHTML = replacement;
+}
+function alteraItalico(){
+	let string = getSelecao(textarea);
+	let txt = textarea.value;
+	let replacement = "";
+	
+	textarea.value = replacement;
+	replacement = txt.replace(string,string.italics());
+	
+	textarea.value = replacement;
+	document.querySelector("#box2").innerHTML = replacement;
+}
 function getSelecao(campo){
- campo = textarea;
-  if(document.selection){
-    sel = document.selection.createRange().text;
-  }else{
-    sel = campo.value.substring(campo.selectionStart, campo.selectionEnd);
-  }
-  let b= '';
-  x = textarea.value;
-  b = x.replace(sel,sel.bold());
-document.querySelector("#box2").innerHTML = b;
-textarea.value = '';
-textarea.value = b;
-
+	if(document.selection){
+		sel = document.selection.createRange().text;
+	}else{
+		sel = campo.value.substring(campo.selectionStart, campo.selectionEnd);
+	}
+	return sel;
 }
 </script>
 </html>
