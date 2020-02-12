@@ -49,6 +49,9 @@ bNegrito.addEventListener('click',alteraNegrito);
 bItalico.addEventListener('click',alteraItalico);
 bUnderscore.addEventListener('click',alteraUnderscore);
 bAlLeft.addEventListener('click',leftTexto);
+bAlRight.addEventListener('click',rightTexto);
+bAlJustify.addEventListener('click',justifyTexto);
+bAlCenter.addEventListener('click',centerTexto);
 
 textarea.onkeydown = function(){
     box2.innerHTML = textarea.value;
@@ -60,6 +63,32 @@ function editaAtividade(campo,i){
 function retornaAtividade(campo){
 	
 	return campo.attributes[0].value;
+}
+function centerTexto(){
+	
+	let box2 = document.querySelector("#box2");
+
+	if (retornaAtividade(bAlCenter) == "I"){
+		box2.style.textAlign = "center";
+		editaAtividade(bAlLeft,"I");
+		editaAtividade(bAlJustify,"I");
+		editaAtividade(bAlRight,"I");
+		editaAtividade(bAlCenter,"A");
+		
+	}
+}
+function justifyTexto(){
+	
+	let box2 = document.querySelector("#box2");
+
+	if (retornaAtividade(bAlJustify) == "I"){
+		box2.style.textAlign = "justify";
+		editaAtividade(bAlLeft,"I");
+		editaAtividade(bAlJustify,"A");
+		editaAtividade(bAlRight,"I");
+		editaAtividade(bAlCenter,"I");
+		
+	}
 }
 function leftTexto(){
 	
@@ -79,7 +108,7 @@ function rightTexto(){
 	let box2 = document.querySelector("#box2");
 
 	if (retornaAtividade(bAlRight) == "I"){
-		box2.style.textAlign = "left";
+		box2.style.textAlign = "right";
 		editaAtividade(bAlLeft,"I");
 		editaAtividade(bAlJustify,"I");
 		editaAtividade(bAlRight,"A");
