@@ -34,16 +34,34 @@ let bUnderscore = document.querySelector('button#u');
 bNegrito.addEventListener('click',alteraNegrito);
 bItalico.addEventListener('click',alteraItalico);
 bUnderscore.addEventListener('click',alteraUnderscore);
+
+function editaAtividade(campo,i){
+	if (typeof i == "string")
+		campo.attributes[0].value = i;
+}
+function retornaAtividade(campo){
+	return campo.attributes[0].value;
+}
+
 function alteraUnderscore(){
 	let box2 = document.querySelector("#box2");
-	if (bUnderscore.attributes[0].value == "I"){
-		document.querySelector("#box2").style.textDecoration = "underline overline";
-		bUnderscore.attributes[0].value = "A";
+
+	if (retornaAtividade(bUnderscore) == "I"){
+		box2.style.textDecoration = "underline overline";
+		editaAtividade(bUnderscore,"A");
 	}
 	else{
-		document.querySelector("#box2").style.textDecoration = "none";
-		bUnderscore.attributes[0].value = "I";
+		box2.style.textDecoration = "none";
+		editaAtividade(bUnderscore,"I");
 	}
+	// if (bUnderscore.attributes[0].value == "I"){
+	// 	box2.style.textDecoration = "underline overline";
+	// 	bUnderscore.attributes[0].value = "A";
+	// }
+	// else{
+	// 	box2.style.textDecoration = "none";
+	// 	bUnderscore.attributes[0].value = "I";
+	// }
 }
 function alteraNegrito(){
 	let string = getSelecao(textarea);
