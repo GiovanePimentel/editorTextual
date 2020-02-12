@@ -3,26 +3,48 @@
 	<title>
 	</title>
 </head>
+<style>
+	body{
+		width: auto;
+	}
+	#box1{
+		display: flexbox;
+	}
+</style> 
 <body>
 	<div id="box1">
-		<button data_tag="I"id="b"><b>b</b></button>
-		<button data_tag="I"id="i"><i>i</i></button>
+		<div class="buttonList">
+			<button data_tag="I" id="b"><b>b</b></button>
+			<button data_tag="I" id="i"><i>i</i></button>
+			<button data_tag="I" id="u">_</button>
+		</div>
 		<textarea id="txtArea">
 		</textarea>
 		<div id="box2">
-
-		</div>
 		
+		</div>
 	</div>
 </body>
 <script type="text/javascript">
 let bNegrito = document.querySelector('button#b');
 let bItalico = document.querySelector('button#i');
 let textarea = document.querySelector('textarea');
+let bUnderscore = document.querySelector('button#u');
 
 bNegrito.addEventListener('click',alteraNegrito);
 bItalico.addEventListener('click',alteraItalico);
-
+bUnderscore.addEventListener('click',alteraUnderscore);
+function alteraUnderscore(){
+	let box2 = document.querySelector("#box2");
+	if (bUnderscore.attributes[0].value == "I"){
+		document.querySelector("#box2").style.textDecoration = "underline overline";
+		bUnderscore.attributes[0].value = "A";
+	}
+	else{
+		document.querySelector("#box2").style.textDecoration = "none";
+		bUnderscore.attributes[0].value = "I";
+	}
+}
 function alteraNegrito(){
 	let string = getSelecao(textarea);
 	let txt = textarea.value;
