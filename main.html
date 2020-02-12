@@ -33,6 +33,20 @@
 		<div id="box2">
 		
 		</div>
+		
+			<li>g</li>
+			<li>g</li>
+		<ol>
+			<li>g</li>
+		</ol>
+		<ol>
+			<li>g</li>
+			<li>g</li>
+		</ol>
+		<ul>
+			<li>h</li>
+			<li>g</li>
+		</ul>
 	</div>
 </body>
 <script type="text/javascript">
@@ -54,7 +68,8 @@ bAlJustify.addEventListener('click',justifyTexto);
 bAlCenter.addEventListener('click',centerTexto);
 
 textarea.onkeydown = function(){
-    box2.innerHTML = textarea.value;
+	let reg = new RegExp(String.fromCharCode(10), 'g')
+    box2.innerHTML = textarea.value.replace(reg,'<br>');
 }
 function editaAtividade(campo,i){
 	if (typeof i == "string")
@@ -131,7 +146,7 @@ function alteraUnderscore(){
 function alteraNegrito(){
 	let a = textarea.selectionStart 
 	let b = textarea.selectionEnd
-	console.log(a,b);
+	var reg
 	let string = getSelecao(textarea);
 	let txt = textarea.value;
 	let replacement = "";
@@ -144,6 +159,8 @@ function alteraNegrito(){
 	textarea.selectionStart = a + 3;
 	textarea.selectionEnd = b + 3;
 	textarea.focus();
+	
+
 	
 	document.querySelector("#box2").innerHTML = replacement;
 }
