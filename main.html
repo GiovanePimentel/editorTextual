@@ -5,14 +5,20 @@
 </head>
 <style>
 	body{
-		width: auto;
+		width: 80%;
 	}
 	#box1{
-		display: flexbox;
+		width: 80%;
+		display:block;
+		align-content: center;
 	}
 	#box2{
 		border: 1px solid;
 		height: 300px;
+		width: 80%;
+	}
+	textarea{
+		height: 100px;
 		width: 80%;
 	}
 </style> 
@@ -27,26 +33,25 @@
 			<button data_tag="I" id="aj"><i class="fas fa-align-justify"></i></button>
 			<button data_tag="I" id="ar"><i class="fas fa-align-right"></i></button>
 			<button data_tag="I" id="ac"><i class="fas fa-align-center"></i></button>
+			<select id="fs">
+				<option value="h1">H1</option>
+				<option value="h2">H2</option>
+				<option value="h3">H3</option>
+				<option value="h4">H4</option>
+				<option value="h5">H5</option>
+				<option value="h6">H6</option>
+				<option value="h7">H7</option>
+				<option value="p">Parágrafo</option>
+			</select>
 		</div>
 		<textarea id="txtArea">
 		</textarea>
+		<hr/>
 		<div id="box2">
 		
 		</div>
 		
-			<li>g</li>
-			<li>g</li>
-		<ol>
-			<li>g</li>
-		</ol>
-		<ol>
-			<li>g</li>
-			<li>g</li>
-		</ol>
-		<ul>
-			<li>h</li>
-			<li>g</li>
-		</ul>
+			
 	</div>
 </body>
 <script type="text/javascript">
@@ -58,7 +63,8 @@ let bAlJustify = document.getElementById('aj');
 let bAlRight = document.getElementById('ar');
 let bAlCenter = document.getElementById('ac');
 let textarea = document.querySelector('textarea');
-
+let comboFs = document.getElementById('fs');
+comboFs.value = '';
 bNegrito.addEventListener('click',alteraNegrito);
 bItalico.addEventListener('click',alteraItalico);
 bUnderscore.addEventListener('click',alteraUnderscore);
@@ -66,6 +72,17 @@ bAlLeft.addEventListener('click',leftTexto);
 bAlRight.addEventListener('click',rightTexto);
 bAlJustify.addEventListener('click',justifyTexto);
 bAlCenter.addEventListener('click',centerTexto);
+comboFs.addEventListener('change',fontSize)
+function fontSize(){
+	let fss = comboFs.value;
+	console.log(fss);
+
+	console.log(textarea.value == '		')
+	if(textarea.value == '		'){
+		textarea.value = "<"+fss+">		</"+fss+">";
+		textarea.selectionStart = 2 + fss.length
+	}
+}
 
 textarea.onkeydown = function(){
 	let reg = new RegExp(String.fromCharCode(10), 'g')
@@ -89,7 +106,6 @@ function centerTexto(){
 		editaAtividade(bAlJustify,"I");
 		editaAtividade(bAlRight,"I");
 		editaAtividade(bAlCenter,"A");
-		
 	}
 }
 function justifyTexto(){
@@ -102,7 +118,6 @@ function justifyTexto(){
 		editaAtividade(bAlJustify,"A");
 		editaAtividade(bAlRight,"I");
 		editaAtividade(bAlCenter,"I");
-		
 	}
 }
 function leftTexto(){
@@ -115,7 +130,6 @@ function leftTexto(){
 		editaAtividade(bAlJustify,"I");
 		editaAtividade(bAlRight,"I");
 		editaAtividade(bAlCenter,"I");
-		
 	}
 }
 function rightTexto(){
@@ -128,7 +142,6 @@ function rightTexto(){
 		editaAtividade(bAlJustify,"I");
 		editaAtividade(bAlRight,"A");
 		editaAtividade(bAlCenter,"I");
-		
 	}
 }
 function alteraUnderscore(){
@@ -159,21 +172,24 @@ function alteraNegrito(){
 	textarea.selectionStart = a + 3;
 	textarea.selectionEnd = b + 3;
 	textarea.focus();
-	
 
-	
 	document.querySelector("#box2").innerHTML = replacement;
 }
 function alteraItalico(){
 	let string = getSelecao(textarea);
 	let txt = textarea.value;
 	let replacement = "";
+	let a = textarea.selectionStart 
+	let b = textarea.selectionEnd
 	
 	textarea.value = replacement;
 	replacement = txt.replace(string,string.italics());
 	
 	textarea.value = replacement;
 	document.querySelector("#box2").innerHTML = replacement;
+	textarea.selectionStart = a + 3;
+	textarea.selectionEnd = b + 3;
+	textarea.focus();
 }
 function getSelecao(campo){
 	if(document.selection){
