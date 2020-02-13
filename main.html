@@ -65,6 +65,7 @@ let bAlCenter = document.getElementById('ac');
 let textarea = document.querySelector('textarea');
 let comboFs = document.getElementById('fs');
 comboFs.value = '';
+
 bNegrito.addEventListener('click',alteraNegrito);
 bItalico.addEventListener('click',alteraItalico);
 bUnderscore.addEventListener('click',alteraUnderscore);
@@ -73,17 +74,21 @@ bAlRight.addEventListener('click',rightTexto);
 bAlJustify.addEventListener('click',justifyTexto);
 bAlCenter.addEventListener('click',centerTexto);
 comboFs.addEventListener('change',fontSize)
+
 function fontSize(){
 	let fss = comboFs.value;
 	console.log(fss);
 
 	console.log(textarea.value == '		')
 	if(textarea.value == '		'){
-		textarea.value = "<"+fss+">		</"+fss+">";
+		textarea.value = "<"+fss+">    </"+fss+">";
 		textarea.selectionStart = 2 + fss.length
+	}else{
+		let final = textarea.value.length;
+		let string = String.fromCharCode(10) + "<"+fss+">    </"+fss+">";
+		textarea.value = textarea.value + string;
 	}
 }
-
 textarea.onkeydown = function(){
 	let reg = new RegExp(String.fromCharCode(10), 'g')
     box2.innerHTML = textarea.value.replace(reg,'<br>');
