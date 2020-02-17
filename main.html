@@ -40,7 +40,6 @@
 				<option value="h4">H4</option>
 				<option value="h5">H5</option>
 				<option value="h6">H6</option>
-				<option value="h7">H7</option>
 				<option value="p">Parágrafo</option>
 			</select>
 		</div>
@@ -78,20 +77,24 @@ comboFs.addEventListener('change',fontSize)
 function fontSize(){
 	let fss = comboFs.value;
 	console.log(fss);
-
-	console.log(textarea.value == '		')
-	if(textarea.value == '		'){
+	if(textarea.value == '		')
+	{
 		textarea.value = "<"+fss+">    </"+fss+">";
 		textarea.selectionStart = 2 + fss.length
-	}else{
+	}
+	else
+	{
 		let final = textarea.value.length;
 		let string = String.fromCharCode(10) + "<"+fss+">    </"+fss+">";
 		textarea.value = textarea.value + string;
 	}
 }
-textarea.onkeydown = function(){
+textarea.onkeyup = function(){
 	let reg = new RegExp(String.fromCharCode(10), 'g')
-    box2.innerHTML = textarea.value.replace(reg,'<br>');
+    
+	
+	box2.innerHTML = textarea.value.replace(reg,'<br>');
+	
 }
 function editaAtividade(campo,i){
 	if (typeof i == "string")
